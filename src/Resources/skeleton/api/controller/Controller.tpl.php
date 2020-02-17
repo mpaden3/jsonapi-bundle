@@ -12,7 +12,6 @@ use <?= $repository_full_class_name ?>;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -24,7 +23,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class <?= $class_name ?> extends Controller
 {
     /**
-     * @Route("/", name="<?= $route_name ?>_index", methods="GET")
+     * @Route("", name="<?= $route_name ?>_index", methods="GET")
      */
     public function index(<?= $repository_class_name ?> $<?= $repository_var ?>, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -39,7 +38,7 @@ class <?= $class_name ?> extends Controller
     }
 
     /**
-     * @Route("/", name="<?= $route_name ?>_new", methods="POST")
+     * @Route("", name="<?= $route_name ?>_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
     {
@@ -102,7 +101,7 @@ class <?= $class_name ?> extends Controller
     /**
      * @Route("/{<?= $entity_identifier ?>}", name="<?= $route_name ?>_delete", methods="DELETE")
      */
-    public function delete(Request $request, <?= $entity_class_name ?> $<?= $entity_var_name ?>): ResponseInterface
+    public function delete(<?= $entity_class_name ?> $<?= $entity_var_name ?>): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($<?= $entity_var_name?>);
